@@ -1,0 +1,84 @@
+{% extends "applications/layout.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+      <ul class="list-unstyled">
+        <li id="li_lottery_list">
+          <p><strong>Step 1:</strong> Get Student List</p>
+          <div class="row">
+            <div class="form-group col-2">
+              <select  class="form-control" data-style="btn-info" id="lotterySchoolYear">
+                <option value="">School Year</option>
+                <option value="20-21">20-21</option>
+                <option value="21-22">21-22</option>
+              </select>
+            </div>
+            <div class="form-group col-2">
+              <select  class="form-control" data-style="btn-info" id="lotterySchool">
+                <option value="">School</option>
+                <option value="HCSS East">HCSS East</option>
+                <option value="HCSS West">HCSS West</option>
+              </select>
+            </div>
+            <div class="form-group col-2">
+              <select  class="form-control" data-style="btn-info" id="lotteryGrade">
+                <option value="">Grade</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+            <div class="form-group col-2">
+              <button type="button" class="btn btn-outline-secondary" id="lotteryFilterButton">Get List</button>
+            </div>
+          </div>
+        </li>
+        <li id="li_run_lottery" style="display: none;">
+          <p><strong>Step 2:</strong> Run Lottery by Assigning Random Numbers</p>
+          <div class="mt-2">
+            <button type="button" class="btn btn-outline-secondary mb-2" id="lotteryRunButton">Run Lottery</button>
+          </div>
+        </li>
+        <li id="li_sort_lottery" style="display: none;">
+          <p><strong>Step 3:</strong> Order List from smallest to greatest: Application Preference -> Siblings, Residents, Non-Residents</p>
+          <div class="mt-2">
+            <button type="button" class="btn btn-outline-secondary" id="lotterySortButton">Sort</button>
+          </div>
+        </li>
+      </ul>
+      <div class="mt-2 mb-2" id="li_save_lottery" style="display: none;">
+        <form class="" method="POST">
+          {% csrf_token %}
+          <div class="" style="display: none;">
+            {{form.lotterydata|as_crispy_field}}
+          </div>
+          <input type="submit" class="btn btn-outline-info" id="lotterySaveButton" value="Save"></input>
+        </form>
+      </div>
+      <table class="table table-striped mb-5" id="lotteryTable">
+        <thead class="table-head">
+          <tr class="header">
+            <th scope="col">Order</th>
+            <th scope="col">Randomly Assigned Number</th>
+            <th scope="col">Application ID</th>
+            <th scope="col">First and Last Initial</th>
+            <th>City</th>
+            <th>Application Preference</th>
+          </tr>
+        </thead>
+        <tbody id="lotteryTableBody">
+        </tbody>
+      </table>
+    </div>
+  {% endblock %}
+
+  {% block tail %}
+    <script type="text/javascript">
+      var application_list = {{application_list|safe}};
+    </script>
+    <script type="text/javascript" src="{% static 'applications/js/run_lottery.js' %}"></script>
+  {% endblock tail %}

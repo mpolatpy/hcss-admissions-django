@@ -1,0 +1,43 @@
+{% extends "applications/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container mt-3">
+      <div class="col-md-10" style="margin: auto;">
+      <div class="text-center">
+        <h1 class="mb-3">HCSS Admission Form</h1>
+      </div>
+      <div class="alert alert-danger" role="alert">
+        An application already exists for the student.
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="">
+            <ul class="list-unstyled">
+              <li><strong>Name: </strong>{{applicant_info.first_name|title}} {{applicant_info.last_name|title}}</li>
+              <li><strong>Date of birth: </strong>{{applicant_info.date_of_birth}}</li>
+              <li><strong>Gender: </strong>{{applicant_info.gender}}</li>
+              <li><strong>School Applied: </strong>{{application_info.school}}</li>
+              <li><strong>School Year: </strong>{{application_info.school_year}}</li>
+            </ul>
+          </div>
+          <p>If you believe this is a mistake, please contact us:</p>
+          <ul class="list-unstyled">
+            <li>Email: info@hampdencharter.org</li>
+            <li>Phone: 413 593 9090 #206</li>
+            <li>Address: 20 Johnson Road, Chicopee MA 01022</li>
+          </ul>
+          <small class="text-muted">Charter schools are free, open-enrollment public schools that are required
+            by law to serve all students. Charter schools shall be open to all students
+            on a space available basis and shall not discriminate in their admission
+            policies or practices on the basis of intellectual or athletic ability,
+            measures of achievement or aptitude, special needs, proficiency in the
+            English Language, or any other basis that would be illegal if used by a
+            school district.</small>
+          <a href="{% url 'application_form' %}">Submit another response</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

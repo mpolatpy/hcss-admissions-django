@@ -1,0 +1,85 @@
+{% extends "applications/layout.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="mt-2 col-9">
+          <h6>Use dropdowns to view applications. You may use search if a table is available.</h6>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <input class="form-control" type="text" id="tableFilter" onkeyup="filterTable()" placeholder="Search for names.." title="Type in a name">
+          </div>
+        </div>
+      </div>
+      
+      <form method="POST">
+      <div class="row">
+          {% csrf_token %}
+        <div class="form-group col-2">
+          <select  class="form-control" name="school_year" data-style="btn-info">
+            <option value="">School Year</option>
+            <option value="20-21">20-21</option>
+            <option value="21-22">21-22</option>
+          </select>
+        </div>
+        <div class="form-group col-3">
+          <select  class="form-control" name="school" data-style="btn-info">
+            <option value="">School</option>
+            <option value="Both">Both</option>
+            <option value="HCSS East">HCSS East</option>
+            <option value="HCSS West">HCSS West</option>
+          </select>
+        </div>
+        <div class="form-group col-2">
+          <select  class="form-control" name="grade" data-style="btn-info">
+            <option value="">Grade</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+        <div class="form-group col-2">
+          <button type="submit" class="btn btn-outline-secondary">Submit</button>
+        </div>
+      </div>
+      </form>
+      
+      <table class="table table-hover mb-5" id="applicationTable">
+        <thead class="table-head">
+          <tr class="header">
+            <th scope="col">School Year</th>
+            <th scope="col">School</th>
+            <th scope="col">Grade</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Application ID</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+    </div>
+    <!-- <script type="text/javascript" src="{% static 'applications/js/load_applications.js' %}"></script> -->
+    <script type="text/javascript">
+      const submitButton = document.getElementById('inputForSubmit');
+      const dataRequestForm = document.querySelector('form')
+      console.log(dataRequestForm);
+
+      dataRequestForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const url = '/applications/application-api/';
+        fetch(url,{
+          method: 'POST',
+          body: formData
+        }).then(r => console.log(JSON.parse(r)))
+      });
+    </script>
+  {% endblock %}

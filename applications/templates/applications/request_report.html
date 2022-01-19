@@ -1,0 +1,31 @@
+{% extends "applications/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="container">
+      <div class="row">
+        <form class="form-inline" method="POST">
+          {% csrf_token %}
+          <div class="col-md-4">
+            <div class="form-group">
+              {{form.school_year|as_crispy_field}}
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              {{form.school|as_crispy_field}}
+            </div>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-secondary" type="submit" name="button">Submit</button>
+          </div>
+        </form>
+      </div>
+      <hr>
+      <div class="text-center" style="margin: auto;">
+        <h6 class="mb-3">Select school year and school to view the report.</h6>
+      </div>
+  </div>
+  {% endblock %}

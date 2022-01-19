@@ -1,0 +1,70 @@
+{% extends "applications/layout.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="form-group col-3">
+          <select  class="form-control" data-style="btn-info" id="selectSchoolYear">
+            <option value="">School Year</option>
+            <option value="20-21">20-21</option>
+            <option value="21-22">21-22</option>
+          </select>
+        </div>
+        <div class="form-group col-3">
+          <select  class="form-control" data-style="btn-info" id="selectSchool">
+            <option value="">School</option>
+            <option value="Both">Both</option>
+            <option value="HCSS East">HCSS East</option>
+            <option value="HCSS West">HCSS West</option>
+          </select>
+        </div>
+        <div class="form-group col-3">
+          <select  class="form-control" data-style="btn-info" id="selectGrade">
+            <option value="">Grade</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <input class="form-control" type="text" id="tableFilter" onkeyup="filterTable()" placeholder="Search for names.." title="Type in a name">
+          </div>
+        </div>
+      </div>
+      <div class="mt-2 text-center">
+        <h6>Use dropdowns to view applications</h6>
+      </div>
+      <table class="table table-hover mb-5" id="applicationTable" style="display: none;">
+        <thead class="table-head">
+          <tr class="header">
+            <th scope="col">School Year</th>
+            <th scope="col">School</th>
+            <th scope="col">Grade</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Application ID</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for application in applications %}
+          <tr style="display: none;">
+            <td>{{ application.school_year }}</th>
+            <td>{{ application.school }}</th>
+            <td>{{ application.grade }}</th>
+            <td>{{ application.applicant__first_name }}</td>
+            <td>{{ application.applicant__last_name }}</td>
+            <th scope="row">{{ application.applicant__pk }}</th>
+            <td><a href="{% url 'applicant_detail' application.applicant__pk %}" class="btn btn-outline-secondary btn-sm">Details</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <script type="text/javascript" src="{% static 'applications/js/filter_applications.js' %}"></script>
+  {% endblock %}

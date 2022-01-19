@@ -1,0 +1,38 @@
+{% extends "applications/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block header %}
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+
+    <div class="row">
+      <form class="form-inline" method="POST">
+        {% csrf_token %}
+        <div class="col-md-4">
+          <div class="form-group" id="schoolYearId">
+            {{form.school_year|as_crispy_field}}
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group" id="schoolSelect">
+            {{form.school|as_crispy_field}}
+          </div>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-secondary" type="submit" name="button">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div class="" id="reportGraph">
+    </div>
+  </div>
+  <script type="text/javascript">
+    var applicationCounts = {{application_data|safe}};
+  </script>
+  <script type="text/javascript" src="{% static 'applications/js/graph.js' %}"></script>
+
+  {% endblock %}

@@ -1,0 +1,204 @@
+{% extends "applications/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container mt-3">
+    <div class="col-md-10" style="margin: auto;">
+      <div class="text-center">
+        <h1 class="mb-3">HCSS Admission Form</h1>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <p>For the translation: <a href="https://translate.google.com/translate?hl=en&sl=en&tl=es&u=hampdencharter.org&sandbox=1">click here</a></p>
+          <p>DEAR PARENT(S) AND APPLICANT: Thank you for your interest in Hampden
+            Charter School of Science East and/or West. Please fill out this
+            application form completely. Information you supply may not be given
+             to any other companies. Applications received unsigned or incomplete
+             may not be considered for acceptance.</p>
+          <p>The primary districts that our schools serve:
+            <ul class="list-unstyled">
+              <li>HCSS-East: Chicopee, Ludlow, West Springfield, and Springfield</li>
+              <li>HCSS-West: Agawam, Holyoke, West Springfield, Westfield</li>
+            </ul>
+          </p>
+          <p>Only students who live in these districts receive preference to that specific school and not to the other (unless you live in West Springfield—then you have preference to both schools). Any resident of Massachusetts, including students who may be homeless, are eligible to apply and to attend HCSS East or West.</p>
+        </div>
+      </div>
+      <form class="" method="POST">
+        {% csrf_token %}
+        <div class="card mb-1">
+          <div class="card-header">
+            <h4 class="">Application Details</h4>
+          </div>
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-group col-md-4 mb-0">
+                {{ form2.school|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form2.school_year|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form2.grade|as_crispy_field }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-1">
+          <div class="card-header">
+            <h4>Student Information</h4>
+          </div>
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-group col-md-4 mb-0">
+                {{ form1.first_name|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form1.middle_name|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form1.last_name|as_crispy_field }}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-2 mb-0">
+                {{ form1.date_of_birth|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-2 mb-0">
+                {{ form1.gender|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-6 mb-0">
+                {{ form1.current_school|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-2 mb-0">
+                {{ form1.current_grade|as_crispy_field }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-1">
+          <div class="card-header">
+            <h4>Address</h4>
+          </div>
+          <div class="card-body">
+            {{ form5.address|as_crispy_field }}
+            <div class="form-row">
+              <div class="form-group col-md-6 mb-0">
+                {{ form5.city|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form5.state|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-2 mb-0">
+                {{ form5.zip_code|as_crispy_field }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-1">
+          <div class="card-header">
+            <h4>Primary Parent</h4>
+          </div>
+          <div class="card-body">
+            <div class="">
+              {{ form3.name|as_crispy_field }}
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4 mb-0">
+                {{ form3.relation|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form3.email|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form3.phone_number|as_crispy_field }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-1">
+          <div class="card-header">
+            <h4>Secondary Parent</h4>
+          </div>
+          <div class="card-body">
+            <div class="">
+              {{ form4.secondary_parent_name|as_crispy_field }}
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4 mb-0">
+                {{ form4.secondary_parent_relation|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form4.secondary_parent_email|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form4.secondary_parent_phone_number|as_crispy_field }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-1">
+          <div class="card-header">
+            <h4>Sibling Information</h4>
+          </div>
+          <div class="card-body">
+            <div class="form-group mb-0">
+              {{ form1.has_sibling|as_crispy_field }}
+            </div>
+            <div class="mt-1">
+              <p>If yes, Name(s) and Grade</p>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6 mb-0">
+                {{ form1.sibling_name|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-6 mb-0">
+                {{ form1.sibling_grade|as_crispy_field }}
+              </div>
+            </div>
+            <small>*Sibling preference for admission is only applies to students who share a common parent through birth or legal adoption. Students must provide documentation (i.e.: birth certificate, legal records) to receive preference. Sibling preference will only be applied for the campus which the sibling attends </small>
+          </div>
+        </div>
+        <div class="card mb-1">
+          <div class="card-body">
+            <div class="form-group mb-0">
+              {{ form2.how_did_you_hear|as_crispy_field }}
+              {{ form2.other_hear_option|as_crispy_field }}
+            </div>
+          </div>
+        </div>
+        <div class="card mb-1">
+          <div class="card-body">
+            <h5><strong>Non-Discrimination Statement</strong></h5>
+            <div><small class="text-muted">In accordance with M.G.L. c. 76, s. 5, Hampden Charter School of
+              Science shall not discriminate nor tolerates harassment based on race, color,
+              national origin, creed, sex, ethnicity, gender identity, sexual orientation,
+              mental or physical disability, age, ancestry, athletic performance, special need,
+              proficiency in the English language or a foreign language, or prior academic
+              achievement. Hampden Charter School of Science has a zero tolerance for harassment
+              based on these areas.</small></div>
+            <div><small class="text-muted">A school may not require any action by a student or family (such as an
+            admissions test, interview, essay, attendance at an information session, etc.)
+            in order for an applicant to either receive or submit an application for admission
+            to that school.</small></div>
+          </div>
+        </div>
+
+        <div class="card mb-1">
+          <div class="card-body">
+            <small>We hereby certify that, to the best of my/our knowledge and belief, the answers to the foregoing questions and statements made by me/us in this application are complete and accurate. I/We understand that any false information or misrepresentations of facts may result in rejection of this application or future dismissal of the applicant.</small>
+            <div class="form-group mt-1 mb-0">
+              {{ form2.agree_to_terms|as_crispy_field }}
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 mb-3">
+          <button class="btn btn-info" type="submit" name="button">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% endblock %}

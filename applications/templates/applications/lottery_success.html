@@ -1,0 +1,18 @@
+{% extends "applications/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container">
+    <ul>
+      {% for student in data %}
+        <li>{{ student }}</li>
+      {% endfor %}
+    </ul>
+    <hr>
+    <ul>
+      {% for student in applicants %}
+        <li>{{ student }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

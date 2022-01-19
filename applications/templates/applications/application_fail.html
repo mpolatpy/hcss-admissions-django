@@ -1,0 +1,35 @@
+{% extends "applications/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container mt-3">
+      <div class="col-md-10" style="margin: auto;">
+      <div class="text-center">
+        <h1 class="mb-3">HCSS Admission Form</h1>
+      </div>
+      <div class="alert alert-success" role="alert">
+        You have successfully submitted your application. You will receive an email for your records.
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <p>Thank you for your application.</p>
+          <p>Please contact us with any further questions:</p>
+          <ul class="list-unstyled">
+            <li>Email: info@hampdencharter.org</li>
+            <li>Phone: 413 593 9090 #206</li>
+            <li>Address: 20 Johnson Road, Chicopee MA 01022</li>
+          </ul>
+          <small class="text-muted">Charter schools are free, open-enrollment public schools that are required
+            by law to serve all students. Charter schools shall be open to all students
+            on a space available basis and shall not discriminate in their admission
+            policies or practices on the basis of intellectual or athletic ability,
+            measures of achievement or aptitude, special needs, proficiency in the
+            English Language, or any other basis that would be illegal if used by a
+            school district.</small>
+          <a href="{% url 'application_form' %}">Submit another response</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

@@ -1,0 +1,163 @@
+{% extends "applications/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+  <div class="mt-2 mb-4 text-center">
+    <h4><strong>Application Details for {{applicant.first_name}} {{applicant.last_name}}</strong></h4>
+  </div>
+  <form class="" method="POST">
+    {% csrf_token %}
+
+    <div class="card">
+      <div class="card-header">
+        <h4>Student Information</h4>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-md-4 mb-0">
+            {{ form1.first_name|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-4 mb-0">
+            {{ form1.middle_name|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-4 mb-0">
+            {{ form1.last_name|as_crispy_field }}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-2 mb-0">
+            {{ form1.date_of_birth|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-2 mb-0">
+            {{ form1.gender|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-6 mb-0">
+            {{ form1.current_school|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-2 mb-0">
+            {{ form1.current_grade|as_crispy_field }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>Main Office Only</h4>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-md-3 mb-0">
+            {{ form1.lottery_status|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-9 mb-0">
+            {{ form1.notes|as_crispy_field }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>Primary Parent</h4>
+      </div>
+      <div class="card-body">
+        <div class="">
+          {{ form3.name|as_crispy_field }}
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4 mb-0">
+            {{ form3.relation|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-4 mb-0">
+            {{ form3.email|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-4 mb-0">
+            {{ form3.phone_number|as_crispy_field }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>Secondary Parent</h4>
+      </div>
+      <div class="card-body">
+        <div class="">
+          {{ form4.secondary_parent_name|as_crispy_field }}
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4 mb-0">
+            {{ form4.secondary_parent_relation|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-4 mb-0">
+            {{ form4.secondary_parent_email|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-4 mb-0">
+            {{ form4.secondary_parent_phone_number|as_crispy_field }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>Address</h4>
+      </div>
+      <div class="card-body">
+        {{ form5.address|as_crispy_field }}
+        <div class="form-row">
+          <div class="form-group col-md-6 mb-0">
+            {{ form5.city|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-4 mb-0">
+            {{ form5.state|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-2 mb-0">
+            {{ form5.zip_code|as_crispy_field }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>Sibling Information</h4>
+      </div>
+      <div class="card-body">
+        <div class="form-group mb-0">
+          {{ form1.has_sibling|as_crispy_field }}
+        </div>
+        <div class="mt-1">
+          <p>If yes, Name(s) and Grade</p>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6 mb-0">
+            {{ form1.sibling_name|as_crispy_field }}
+          </div>
+          <div class="form-group col-md-6 mb-0">
+            {{ form1.sibling_grade|as_crispy_field }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>Application Details</h4>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          {% for field in form2 %}
+          <div class="form-group col-md-4 mb-0">
+            {{ field|as_crispy_field }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="mb-5 mt-3">
+      <button class="btn btn-secondary" type="submit" name="button">Update</button>
+      <a href="{% url 'applicant-delete' applicant.pk %}" class="btn btn-danger ml-2">Delete</a>
+    </div>
+  </form>
+
+  </div>
+  </div>
+{% endblock %}
